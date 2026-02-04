@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Motion Store</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="{% static 'tienda/css/motion.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="motion-navbar">
+    <div class="nav-left">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <div class="nav-center">
+        <span class="brand-main">MOTION</span>
+        <span class="brand-sub">Venta de películas</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="/">Inicio</a>
+        <a href="/usuarios/registro/">Registro</a>
+    </div>
+</nav>
+
+<!-- MENU LATERAL -->
+<div id="menuCategorias" class="side-menu">
+    <div class="menu-header">🎬 Categorías</div>
+    {% for cat in categorias %}
+        <a href="/categoria/{{ cat.id }}/" class="menu-item">{{ cat.nombre }}</a>
+    {% endfor %}
+</div>
+
+<!-- CONTENIDO -->
+<div class="motion-container center-page">
+
+    <div class="auth-box">
+        <h2 class="auth-title">🎬 Iniciar sesión</h2>
+        <p class="auth-subtitle">Accede a Motion Store</p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+
+            <button type="submit" class="btn-primary full-width">Entrar</button>
+        </form>
+
+        <div class="auth-footer">
+            <p>¿No tienes cuenta?</p>
+            <a href="/usuarios/registro/" class="link-primary">Crear cuenta</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script>
+function toggleMenu(){
+    document.getElementById("menuCategorias").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

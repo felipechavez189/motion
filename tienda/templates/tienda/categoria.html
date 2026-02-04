@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Categoría | Motion Store</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="{% static 'tienda/css/motion.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="motion-navbar">
+    <div class="nav-left">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+    </div>
+
+    <div class="nav-center">
+        <span class="brand-main">MOTION</span>
+    </div>
+
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <a href="/carrito/">🛒 Carrito</a>
+            <a href="/usuarios/logout/">Salir</a>
+        {% else %}
+            <a href="/usuarios/login/">Login</a>
+            <a href="/usuarios/registro/">Registro</a>
+        {% endif %}
+    </div>
+</nav>
+
+<!-- MENU LATERAL -->
+<div id="menuCategorias" class="side-menu">
+    <div class="menu-header">🎬 Categorías</div>
+    {% for cat in categorias %}
+        <a href="/categoria/{{ cat.id }}/" class="menu-item">{{ cat.nombre }}</a>
+    {% endfor %}
+</div>
+
+<!-- CONTENIDO -->
+<div class="motion-container">
+    <h2 class="section-title">🎥 Películas</h2>
+
+    <div class="movie-grid">
+        {% for p in productos %}
+        <div class="movie-card">
+            <div class="movie-body">
+                <h3 class="movie-title">{{ p.nombre }}</h3>
+                <p class="movie-price">${{ p.precio }}</p>
+                <a href="/carrito/agregar/{{ p.id }}/" class="movie-btn">Agregar al carrito</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- JS -->
+<script>
+function toggleMenu(){
+    document.getElementById("menuCategorias").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
+
