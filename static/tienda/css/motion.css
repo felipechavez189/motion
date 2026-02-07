@@ -1,3 +1,4 @@
+
 /* ===== GENERAL ===== */
 body{
     background:#f2f6fb;
@@ -127,4 +128,52 @@ body{
 .movie-price{
     font-weight:700;
     color:#0a3d91;
+}
+
+
+/* ===== DETALLE PRODUCTO ===== */
+
+.detalle-grid{
+    display:grid;
+    grid-template-columns: 420px 1fr;
+    gap:40px;
+    align-items:start;
+}
+
+.detalle-img-box{
+    width:100%;
+    max-width:420px;
+}
+
+.detalle-img{
+    width:100%;
+    height:auto;
+    max-height:520px;
+    object-fit:contain;
+    border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    background:#000;
+}
+
+.detalle-info{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.detalle-title{
+    font-size:32px;
+    font-weight:800;
+}
+
+.detalle-precio{
+    font-size:26px;
+    font-weight:700;
+    color:#ffd500;
+}
+
+.detalle-descripcion{
+    font-size:15px;
+    line-height:1.6;
+    opacity:0.9;
 }

@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import Categoria, Producto
+from django.shortcuts import render, get_object_or_404
+from .models import Producto, Categoria
 
 def home(request):
     categorias = Categoria.objects.all()
@@ -15,4 +15,12 @@ def categoria_view(request, id):
     return render(request, 'tienda/categoria.html', {
         'categorias': categorias,
         'productos': productos
+    })
+
+def detalle_producto(request, id):
+    producto = get_object_or_404(Producto, id=id)
+    categorias = Categoria.objects.all()
+    return render(request, 'tienda/detalle.html', {
+        'producto': producto,
+        'categorias': categorias
     })

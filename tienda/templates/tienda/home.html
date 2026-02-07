@@ -42,25 +42,42 @@
 <!-- CONTENIDO -->
 <div class="container mt-4">
   <div class="row">
+
     {% for p in productos %}
     <div class="col-md-3">
       <div class="card movie-card mb-4">
+
         {% if p.imagen %}
-          <img src="{{ p.imagen.url }}" class="card-img-top movie-img">
+          <a href="/producto/{{ p.id }}/">
+            <img src="{{ p.imagen.url }}" class="card-img-top movie-img">
+          </a>
         {% endif %}
+
         <div class="card-body text-center">
-          <h6 class="movie-title">{{ p.nombre }}</h6>
+
+          <h6 class="movie-title">
+              <a href="/producto/{{ p.id }}/" class="movie-link">
+                  {{ p.nombre }}
+              </a>
+          </h6>
+
           <p class="movie-price">${{ p.precio }}</p>
 
           {% if user.is_authenticated %}
-            <a href="/carrito/agregar/{{ p.id }}/" class="btn btn-primary btn-sm w-100">Agregar al carrito</a>
+            <a href="/carrito/agregar/{{ p.id }}/" class="btn btn-primary btn-sm w-100">
+                Agregar al carrito
+            </a>
           {% else %}
-            <a href="/usuarios/login/" class="btn btn-secondary btn-sm w-100">Login para comprar</a>
+            <a href="/usuarios/login/" class="btn btn-secondary btn-sm w-100">
+                Login para comprar
+            </a>
           {% endif %}
+
         </div>
       </div>
     </div>
     {% endfor %}
+
   </div>
 </div>
 

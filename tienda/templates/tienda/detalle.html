@@ -3,7 +3,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Categoría | Motion</title>
+    <title>{{ producto.nombre }} | Motion</title>
     <link rel="stylesheet" href="{% static 'tienda/css/motion.css' %}">
 </head>
 <body>
@@ -42,44 +42,47 @@
 
 <!-- CONTENIDO -->
 <div class="motion-container">
-    <h2 class="section-title">Películas de la categoría</h2>
 
-    <div class="motion-grid">
+    <div class="detalle-grid">
 
-        {% for p in productos %}
-        <div class="motion-card-product">
+        <!-- IMAGEN -->
+        <div class="detalle-img-box">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" class="detalle-img">
+            {% else %}
+                <div class="no-img">Sin imagen</div>
+            {% endif %}
+        </div>
 
-            {% if p.imagen %}
-                <a href="/producto/{{ p.id }}/">
-                    <img src="{{ p.imagen.url }}" class="product-img">
+        <!-- INFO -->
+        <div class="detalle-info">
+            <h1 class="detalle-title">{{ producto.nombre }}</h1>
+
+            <p class="detalle-categoria">
+                🎬 Categoría: {{ producto.categoria.nombre }}
+            </p>
+
+            <p class="detalle-precio">
+                ${{ producto.precio }}
+            </p>
+
+            <p class="detalle-descripcion">
+                {{ producto.descripcion }}
+            </p>
+
+            {% if user.is_authenticated %}
+                <a href="/carrito/agregar/{{ producto.id }}/" class="motion-btn big">
+                    🛒 Agregar al carrito
+                </a>
+            {% else %}
+                <a href="/usuarios/login/" class="motion-btn big gray">
+                    🔐 Login para comprar
                 </a>
             {% endif %}
-
-            <div class="product-info">
-
-                <h5 class="product-title">
-                    <a href="/producto/{{ p.id }}/" class="product-link">
-                        {{ p.nombre }}
-                    </a>
-                </h5>
-
-                <p class="product-price">${{ p.precio }}</p>
-
-                {% if user.is_authenticated %}
-                    <a href="/carrito/agregar/{{ p.id }}/" class="motion-btn small">
-                        Agregar
-                    </a>
-                {% else %}
-                    <a href="/usuarios/login/" class="motion-btn small gray">
-                        Login para comprar
-                    </a>
-                {% endif %}
-            </div>
-
         </div>
-        {% endfor %}
 
     </div>
+
 </div>
 
 <script>
